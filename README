@@ -1,0 +1,20 @@
+README for Feedback Systems 2e Python files
+RMM, 20 Jun 2021
+
+This directory contains Python code for the examples and selected in the
+second edition of Feedback Systems by Astrom and Murray.
+
+The file corresponding to each example (or figure, if there is not a
+corresponding example) has the form
+
+  example_N-m_shorttitle.py
+  figure_N-m_shorttitle.py
+
+where 'N' is the chapter number and 'm' is the example number.  If you
+run the file in python, it will produce the figures that appear in the
+text.  Note that some figures may look slightly different due to
+Matplotlib formatting.
+
+These example use the Python Control Systems Library (python-control),
+which is available via PIP, Conda, or GitHub.  See python-control.org
+for more information.
