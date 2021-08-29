@@ -1,5 +1,5 @@
-# figure-3.8-predator_prey.py - discrete-time simulation of predator–prey model
-# RMM, 15 May 20219
+# example-3.4-predator_prey.py - discrete-time simulation of predator–prey model
+# RMM, 15 May 2019
 #
 # Figure 3.8: Discrete-time simulation of the predator–prey model
 # (3.13). Using the parameters a = c = 0.014, bh(u) = 0.6, and dl =
