@@ -7,11 +7,11 @@ second edition of Feedback Systems by Astrom and Murray.
 The file corresponding to each example (or figure, if there is not a
 corresponding example) has the form
 
-  example_N-m_shorttitle.py
-  figure_N-m_shorttitle.py
+  example-N.m-short_title.py
+  figure-N.m-short_title.py
 
 where 'N' is the chapter number and 'm' is the example number.  If you
-run the file in python, it will produce the figures that appear in the
+run the file in Python, it will produce the figures that appear in the
 text.  Note that some figures may look slightly different due to
 Matplotlib formatting.
 

@@ -56,3 +56,6 @@ plt.legend(["Hare", "Lynx"])
 
 plt.xlabel("Year")
 plt.ylabel("Population")
+
+# Save the figure
+plt.savefig("figure-3.8-predator_prey.png", bbox_inches='tight')
