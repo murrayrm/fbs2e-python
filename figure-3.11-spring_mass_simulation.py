@@ -80,7 +80,7 @@ analh = plt.plot(ts, ys, 'k-', linewidth=1)
 plt.xlabel("Time [s]")
 plt.ylabel("Position $q$ [m]")
 plt.axis([0, 50, -2, 2])
-plt.legend(["$h = %g$" % h for h in hvec] + ["analytical"]), 
+plt.legend(["$h = %g$" % h for h in hvec] + ["analytical"], loc="lower left")
 
 # Save the figure
 plt.savefig("figure-3.11-spring_mass_simulation.png", bbox_inches='tight')
