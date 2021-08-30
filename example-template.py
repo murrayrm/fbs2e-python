@@ -7,7 +7,9 @@ import control as ct
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Define (or import) the dynamics of the system
+#
+# System dynamics
+#
 
 # Set up the plotting grid to match the layout in the book
 fig = plt.figure(constrained_layout=True)
