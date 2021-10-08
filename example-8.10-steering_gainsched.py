@@ -4,7 +4,11 @@
 import numpy as np
 import control as ct
 from cmath import sqrt
-import matplotlib.pyplot as mpl
+import matplotlib.pyplot as plt
+
+# Set the fonts to match the main text
+plt.rc('font', family='Times New Roman', weight='normal', size=12)
+plt.rcParams['mathtext.fontset'] = 'cm'
 
 #
 # Vehicle steering dynamics
@@ -144,10 +148,10 @@ yref = 1
 T = np.linspace(0, 5, 100)
 
 # Set up a figure for plotting the results
-mpl.figure(figsize=[3.2, 2.4], tight_layout=True)
+plt.figure(figsize=[3.6, 2.7], tight_layout=True)
 
 # Plot the reference trajectory for the y position
-mpl.plot([0, 5], [yref, yref], 'k--')
+plt.plot([0, 5], [yref, yref], 'k-', linewidth=0.6)
 
 # Find the signals we want to plot
 y_index = steering.find_output('y')
@@ -160,16 +164,18 @@ for vref in [8, 10, 12]:
         steering, T, [vref * np.ones(len(T)), yref * np.ones(len(T))])
 
     # Plot the reference speed
-    mpl.plot([0, 5], [vref, vref], 'k--')
+    plt.plot([0, 5], [vref, vref], 'k-', linewidth=0.6)
 
     # Plot the system output
-    y_line, = mpl.plot(tout, yout[y_index, :], 'r')  # lateral position
-    v_line, = mpl.plot(tout, yout[v_index, :], 'b')  # vehicle velocity
+    y_line, = plt.plot(tout, yout[y_index, :], 'r-')  # lateral position
+    v_line, = plt.plot(tout, yout[v_index, :], 'b--')  # vehicle velocity
 
 # Add axis labels
-mpl.xlabel('Time [s]')
-mpl.ylabel('$x$ vel [m/s], $y$ pos [m]')
-mpl.legend((v_line, y_line), ('$v$', '$y$'), loc='center right', frameon=False)
+plt.xlabel('Time [s]')
+plt.ylabel('$\dot x$ [m/s], $y$ [m]')
+plt.legend((v_line, y_line), ('$\dot x$', '$y$'),
+           loc='center right', frameon=False)
 
 # Save the figure
-mpl.savefig('figure-8.13-steering_gainsched.png')
+plt.savefig('figure-8.13-steering_gainsched.png')       # PNG for web
+plt.savefig('steering-gainsched.eps')                   # EPS for book
