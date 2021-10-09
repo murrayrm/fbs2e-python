@@ -5,10 +5,7 @@ import numpy as np
 import control as ct
 from cmath import sqrt
 import matplotlib.pyplot as plt
-
-# Set the fonts to match the main text
-plt.rc('font', family='Times New Roman', weight='normal', size=12)
-plt.rcParams['mathtext.fontset'] = 'cm'
+import fbs                      # FBS plotting customizations
 
 #
 # Vehicle steering dynamics
@@ -148,7 +145,7 @@ yref = 1
 T = np.linspace(0, 5, 100)
 
 # Set up a figure for plotting the results
-plt.figure(figsize=[3.6, 2.7], tight_layout=True)
+fbs.figure('mlh')
 
 # Plot the reference trajectory for the y position
 plt.plot([0, 5], [yref, yref], 'k-', linewidth=0.6)
@@ -177,5 +174,5 @@ plt.legend((v_line, y_line), ('$\dot x$', '$y$'),
            loc='center right', frameon=False)
 
 # Save the figure
-plt.savefig('figure-8.13-steering_gainsched.png')       # PNG for web
-plt.savefig('steering-gainsched.eps')                   # EPS for book
+fbs.savefig('figure-8.13-steering_gainsched.png')       # PNG for web
+fbs.savefig('steering-gainsched.eps')                   # EPS for book
