@@ -84,7 +84,7 @@ P = ct.NonlinearIOSystem(
 
 # Integral controller
 ki = 1000
-C = ct.LinearIOSystem(ct.tf2ss(ct.tf([ki], [1, 0])))
+C = ct.tf2ss(ct.tf([ki], [1, 0]))
 
 # Closed loop system
 sys = ct.feedback(P * C, 1)
