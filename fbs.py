@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 
 # Set the fonts to match the main text
-plt.rc('font', family='Times New Roman', weight='normal', size=14)
+plt.rc('font', family='Times New Roman', weight='normal', size=11)
 plt.rcParams['mathtext.fontset'] = 'cm'
 
 

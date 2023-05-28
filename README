@@ -1,8 +1,8 @@
 README for Feedback Systems 2e Python files
 RMM, 20 Jun 2021
 
-This directory contains Python code for the examples and selected in the
-second edition of Feedback Systems by Astrom and Murray.
+This directory contains Python code for the examples and selected figures
+in the second edition of Feedback Systems by Astrom and Murray.
 
 The file corresponding to each example (or figure, if there is not a
 corresponding example) has the form
@@ -18,3 +18,9 @@ Matplotlib formatting.
 These example use the Python Control Systems Library (python-control),
 which is available via PIP, Conda, or GitHub.  See python-control.org
 for more information.
+
+Several modules are included that are imported in multiple examples and
+figures:
+
+* cruise.py: vehicle dynamics and PI controller
+* fbs.py: FBS plotting customizations (to match the style of the text)

@@ -84,5 +84,5 @@ for wc in wc_list:
 # Label PI curves
 pi_u_ax.legend()
 
-# Overalll figure labeling
+# Overall figure labeling
 plt.tight_layout()

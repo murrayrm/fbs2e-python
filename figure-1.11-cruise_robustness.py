@@ -14,7 +14,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import control as ct
-import cruise
+import cruise                   # vehicle dynamics, PI controller
 
 # Define the time and input vectors
 T = np.linspace(0, 25, 101)
@@ -35,14 +35,13 @@ plt.plot([T[0], T[-1]], [vref[0], vref[-1]], 'k-')      # reference velocity
 plt.plot([5, 5], [18.75, 20.25], 'k:')                  # disturbance start
 
 masses = [1200, 1600, 2000]
-handles = []
 for i, m in enumerate(masses):
     # Compute the equilibrium state for the system
     X0, U0 = ct.find_eqpt(
         cruise.cruise_PI,
         [vref[0], 0],
         [vref[0], gear[0], theta0[0]], 
-        iu=[1, 2], y0=[vref[0], 0], iy=[0], params={'m':m})
+        iu=[1, 2], y0=[vref[0], 0], iy=[0], params={'m': m})
 
     # Simulate the effect of a hill
     t, y = ct.input_output_response(
