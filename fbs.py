@@ -14,8 +14,11 @@ def figure(size='mlh'):
         plt.figure(figsize=[3.4, 2.55])
     elif size == '211':
         plt.figure(figsize=[6.8, 2.55])
+    elif size == '321':
+        plt.figure(figsize=[3.4, 1.7])
     else:
         raise ValueError("unknown figure size")
+    return plt.gca()
     
 
 # Print a figure

@@ -4,7 +4,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import control as ct
-import control.phaseplot as pp
 import fbs                      # FBS plotting customizations
 
 # Oscillator parameters
