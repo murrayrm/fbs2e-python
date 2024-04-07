@@ -12,6 +12,8 @@ plt.rcParams['mathtext.fontset'] = 'cm'
 def figure(size='mlh'):
     if size == 'mlh' or size == '221':
         plt.figure(figsize=[3.4, 2.55])
+    elif size == '211':
+        plt.figure(figsize=[6.8, 2.55])
     else:
         raise ValueError("unknown figure size")
     
