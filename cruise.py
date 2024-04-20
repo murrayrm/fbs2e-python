@@ -100,7 +100,7 @@ def vehicle_update(t, x, u, params={}):
 # Vehicle input/output model
 vehicle_dynamics = ct.NonlinearIOSystem(
     vehicle_update, None, name='vehicle',
-    inputs = ('u', 'gear', 'theta'), outputs = ('v'), states=('v'))
+    inputs = ['u', 'gear', 'theta'], outputs = ['v'], states=['v'])
 
 #
 # PI controller
@@ -119,7 +119,7 @@ PI_control = ct.tf2io(
 
 cruise_PI = ct.InterconnectedSystem(
     (vehicle_dynamics, PI_control), name='cruise',
-    connections = [('control.u', '-vehicle.v'), ('vehicle.u', 'control.y')],
-    inplist = ('control.u', 'vehicle.gear', 'vehicle.theta'),
-    inputs = ('vref', 'gear', 'theta'),
-    outlist = ('vehicle.v', 'vehicle.u'), outputs = ('v', 'u'))
+    connections = [['control.u', '-vehicle.v'], ['vehicle.u', 'control.y']],
+    inplist = ['control.u', 'vehicle.gear', 'vehicle.theta'],
+    inputs = ['vref', 'gear', 'theta'],
+    outlist = ['vehicle.v', 'vehicle.u'], outputs = ['v', 'u'])
