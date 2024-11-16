@@ -42,14 +42,14 @@ for wc in wc_list:
     if 'w_y_ax' not in locals():
         w_y_ax = plt.subplot(3, 2, 1)
         plt.ylabel('Output $y$')
-        plt.title("Sweep $\omega_c$, $\zeta_c = %g$" % zc)
+        plt.title(r"Sweep $\omega_c$, $\zeta_c = %g$" % zc)
     w_y_ax.plot(t, y)
 
     if 'w_u_ax' not in locals():
         w_u_ax = plt.subplot(3, 2, 3)
         plt.ylabel('Input $u$')
-        plt.xlabel('Normalized time $\omega_c t$')
-    w_u_ax.plot(t, u, label="$\omega_c = %g$" % wc)
+        plt.xlabel(r'Normalized time $\omega_c t$')
+    w_u_ax.plot(t, u, label=r"$\omega_c = %g$" % wc)
 
 # Label the omega sweep curves
 w_u_ax.legend(loc="upper right")
@@ -77,14 +77,14 @@ for zc in zc_list:
     if 'z_y_ax' not in locals():
         z_y_ax = plt.subplot(3, 2, 2)
         plt.ylabel('Output $y$')
-        plt.title("Sweep $\zeta_c$, $\omega_c = %g$" % wc)
+        plt.title(r"Sweep $\zeta_c$, $\omega_c = %g$" % wc)
     z_y_ax.plot(t, y)
 
     if 'z_u_ax' not in locals():
         z_u_ax = plt.subplot(3, 2, 4)
         plt.ylabel('Input $u$')
-        plt.xlabel('Normalized time $\omega_c t$')
-    z_u_ax.plot(t, u, label="$\zeta_c = %g$" % zc)
+        plt.xlabel(r'Normalized time $\omega_c t$')
+    z_u_ax.plot(t, u, label=r"$\zeta_c = %g$" % zc)
 
 # Label the zeta sweep curves
 z_u_ax.legend(loc="upper right")

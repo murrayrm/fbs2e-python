@@ -8,7 +8,7 @@ import fbs                      # FBS plotting customizations
 
 # Spring mass system
 from springmass import springmass       # use spring mass dynamics
-sys = springmass / springmass(0)        # normalize the response to 1
+sys = springmass / springmass(0).real   # normalize the response to 1
 X0 = [2, -1]                            # initial condition
 
 # Create input vectors

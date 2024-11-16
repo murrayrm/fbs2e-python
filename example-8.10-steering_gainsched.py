@@ -41,7 +41,7 @@ def vehicle_output(t, x, u, params):
     return x                            # return x, y, theta (full state)
 
 # Define the vehicle steering dynamics as an input/output system
-vehicle = ct.NonlinearIOSystem(
+vehicle = ct.nlsys(
     vehicle_update, vehicle_output, states=3, name='vehicle',
     inputs=('v', 'phi'),
     outputs=('x', 'y', 'theta'))
@@ -86,7 +86,7 @@ def control_output(t, x, u, params):
     return  np.array([v, phi])
 
 # Define the controller as an input/output system
-controller = ct.NonlinearIOSystem(
+controller = ct.nlsys(
     None, control_output, name='controller',            # static system
     inputs=('x', 'y', 'theta', 'xd', 'yd', 'thetad',    # system inputs
             'vd', 'phid'),
@@ -111,7 +111,7 @@ def trajgen_output(t, x, u, params):
     return np.array([vref * t, yref, 0, vref, 0])
 
 # Define the trajectory generator as an input/output system
-trajgen = ct.NonlinearIOSystem(
+trajgen = ct.nlsys(
     None, trajgen_output, name='trajgen',
     inputs=('vref', 'yref'),
     outputs=('xd', 'yd', 'thetad', 'vd', 'phid'))
@@ -123,8 +123,8 @@ trajgen = ct.NonlinearIOSystem(
 # the desired forward velocity.  The output for the system is taken as the
 # full vehicle state plus the velocity of the vehicle.
 #
-# We construct the system using the InterconnectedSystem constructor and using
-# signal labels to keep track of everything.  
+# We construct the system using the interconnect function and using signal
+# labels to keep track of everything.
 
 steering = ct.interconnect(
     # List of subsystems
@@ -169,8 +169,8 @@ for vref in [8, 10, 12]:
 
 # Add axis labels
 plt.xlabel('Time [s]')
-plt.ylabel('$\dot x$ [m/s], $y$ [m]')
-plt.legend((v_line, y_line), ('$\dot x$', '$y$'),
+plt.ylabel(r'$\dot x$ [m/s], $y$ [m]')
+plt.legend((v_line, y_line), (r'$\dot x$', '$y$'),
            loc='center right', frameon=False)
 
 # Save the figure

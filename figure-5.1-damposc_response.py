@@ -13,7 +13,7 @@ damposc_params = {'m': 1, 'b': 0.2, 'k': 1}
 def damposc_update(t, x, u, params):
     m, b, k = params['m'], params['b'], params['k']
     return np.array([x[1], -k/m * x[0] - b/m * x[1]])
-damposc = ct.NonlinearIOSystem(damposc_update, params=damposc_params)
+damposc = ct.nlsys(damposc_update, params=damposc_params)
 
 # Simulate the response
 tvec = np.linspace(0, 20, 100)

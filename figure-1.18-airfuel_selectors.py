@@ -24,12 +24,12 @@ import cruise
 #
 
 # Min selector for oil PI controller input
-min_block = ct.NonlinearIOSystem(
+min_block = ct.nlsys(
     updfcn=None, outfcn=lambda t, x, u, params: min(u),
     name='min', inputs=['u1', 'u2'], outputs='y')
 
 # Max selector for air PI controller input
-max_block = ct.NonlinearIOSystem(
+max_block = ct.nlsys(
     updfcn=None, outfcn=lambda t, x, u, params: max(u),
     name='max', inputs=['u1', 'u2'], outputs='y')
 
@@ -41,16 +41,16 @@ Pa = ct.tf([4], [1, 4])
 kpo = 2; kio = 4
 Cio = ct.tf([kio], [1, 0])
 Cpo = kpo
-oil_block = ct.LinearIOSystem(
-    ct.tf2ss(Po * Cio / (1 + Po * (Cio + Cpo))),
+oil_block = ct.tf(
+    Po * Cio / (1 + Po * (Cio + Cpo)),
     name="oil", inputs='r', outputs='y')
 
 # PI controller for air flow
 kpa = 1; kia = 1
 Cia = ct.tf([kia], [1, 0])
 Cpa = kpa
-air_block = ct.LinearIOSystem(
-    ct.tf2ss(Pa * Cia / (1 + Pa * (Cia + Cpa))),
+air_block = ct.tf(
+    Pa * Cia / (1 + Pa * (Cia + Cpa)),
     name="air", inputs='r', outputs='y')
 
 #

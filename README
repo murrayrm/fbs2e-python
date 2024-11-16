@@ -24,3 +24,7 @@ figures:
 
 * cruise.py: vehicle dynamics and PI controller
 * fbs.py: FBS plotting customizations (to match the style of the text)
+
+Release notes
+-------------
+16 Nov 2024, RMM: updated to use control-0.10.1

@@ -23,8 +23,8 @@ import control as ct
 #   x[1]        velocity
 #
 # The nonlinear damping is implemented as a change in the linear damping
-# coefficient at a small velocity.  This is intended to roughly correspond 
-# to some sort of stiction (and give an interesting phase portrait).  The 
+# coefficient at a small velocity.  This is intended to roughly correspond
+# to some sort of stiction (and give an interesting phase portrait).  The
 # default parameters for the system are given by
 #
 #   m = 1       mass, kg
@@ -35,7 +35,13 @@ import control as ct
 #
 # This corresponds to a fairly lightly damped oscillator away from the origin.
 
-def nlspringmass(x, t, u=0, m=1, k=1, b1=2, b2=0.01, dth=0.2):
+def _nlspringmass(t, x, u, params):
+    m = params.get('m', 1)
+    k = params.get('k', 1)
+    b1 = params.get('b1', 2)
+    b2 = params.get('b2', 0.01)
+    dth = params.get('dth', 0.2)
+
     # Compute the friction force
     if abs(x[1]) < dth:
         Fb = b1 * x[1];
@@ -48,6 +54,7 @@ def nlspringmass(x, t, u=0, m=1, k=1, b1=2, b2=0.01, dth=0.2):
 
     # Return the time derivative of the state
     return np.array([x[1], -k/m * x[0] - Fb/m])
+nlspringmass = ct.nlsys(_nlspringmass, None, states=2, inputs=0, outputs=2)
 
 #
 # (a) Simulation of the nonlinear spring mass system
@@ -55,27 +62,37 @@ def nlspringmass(x, t, u=0, m=1, k=1, b1=2, b2=0.01, dth=0.2):
 plt.subplot(2, 2, 1)
 
 t = np.linspace(0, 16, 100)
-y = sp.integrate.odeint(nlspringmass, [2, 0], t)
+resp = ct.input_output_response(nlspringmass, t, 0, [2, 0])
+y = resp.outputs
 
-plt.plot(t, y[:, 0], '-', t, y[:, 1], '--')
+plt.plot(t, y[0], '-', t, y[1], '--')
 plt.xlabel('Time $t$ [s]')
-plt.ylabel('Position $q$ [m], velocity $\dot q$̇ [m/s]')
+plt.ylabel(r'Position $q$ [m], velocity $\dot q$̇ [m/s]')
 plt.title('Time plot')
 plt.legend(['Position $q$', 'Velocity $v$'])
 
 #
 # (b) Generate a phase plot for the damped oscillator
 #
-plt.subplot(2, 2, 2)
+ax = plt.subplot(2, 2, 2)
 
-ct.phase_plot(
+cplt = ct.phase_plane_plot(
     nlspringmass,               # dynamics
-    (-1, 1, 8), (-1, 1, 8),     # X, Y range, npoints
-    scale=0.2,
-    X0=[[-1, 0.4], [0.1, 1], [1, -0.4], [-0.1, -1]])
+    [-1, 1, -1, 1],             # bounds of the plot
+    gridspec=[8, 8],            # number of points for vectorfield
+    plot_vectorfield=True,      # plot vectorfield
+    plot_streamlines=False,     # plot streamlines separately
+    plot_separatrices=False,    # leave off separatrices
+    ax=ax
+)
+ct.phaseplot.streamlines(       # Plot streamlines from selected points
+    nlspringmass,
+    np.array([[-1, 0.4], [0.1, 1], [1, -0.4], [-0.1, -1]]),
+    10, ax=ax
+)
 
 plt.xlabel('Position $q$ [m]')
-plt.ylabel('Velocity $\dot q$ [m/s]')
+plt.ylabel(r'Velocity $\dot q$ [m/s]')
 plt.title('Phase portrait')
 plt.axis([-1, 1, -1, 1])
 

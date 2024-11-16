@@ -88,7 +88,7 @@ def repressilator(t, x, u, params):
     return dxdt
 
 # Define the system as an I/O system
-sys = ct.NonlinearIOSystem(
+sys = ct.nlsys(
     updfcn=repressilator, outfcn=lambda t, x, u, params: x[3:],
     states=6, inputs=0, outputs=3)
 

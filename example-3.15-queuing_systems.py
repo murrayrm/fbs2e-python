@@ -29,7 +29,7 @@ def queuing_model(t, x, u, params={}):
     return np.array(lambda_ - mu * x[0] / (1 + x[0]))
 
 # Create I/O system representation
-queuing_sys = ct.NonlinearIOSystem(
+queuing_sys = ct.nlsys(
     updfcn=queuing_model, inputs=1, outputs=1, states=1)
 
 # Set up the plotting grid to match the layout in the book

@@ -34,6 +34,6 @@ def _congctrl_update(t, x, u, params):
 # Function to define an I/O system
 def create_iosystem(M, N=60, rho=2e-4, c=10):
     #! TODO: Check to make sure M and N are compatible
-    return ct.NonlinearIOSystem(
+    return ct.nlsys(
         _congctrl_update, None, states=M+1,
         params={'N': N, 'rho': rho, 'c': c})

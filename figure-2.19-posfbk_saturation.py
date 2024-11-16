@@ -73,7 +73,7 @@ for r in [0, G(ymax), 0.5]:
 plt.subplot(2, 2, 2)
 plt.title('Hysteretic input/output map')
 plt.xlabel('$r$')
-plt.ylabel('$y = G^\dagger(r)$')
+plt.ylabel(r'$y = G^\dagger(r)$')
 
 # Plot y versus r (multi-valued)
 plt.plot(G(y_stable), y_stable, 'b-')       # Upper branch
@@ -98,8 +98,8 @@ plt.subplot(2, 1, 2)
 plt.title('Input/output behavior')
 
 # Closed loop dynamics
-linsys = ct.LinearIOSystem(ct.tf2ss(ct.tf([b], [1, a])))
-nonlin = ct.NonlinearIOSystem(
+linsys = ct.tf([b], [1, a])
+nonlin = ct.nlsys(
     updfcn=None, outfcn=lambda t, x, u, params: F(u),
     inputs=1, outputs=1)
 posfbk = ct.feedback(nonlin * linsys, 1, 1)

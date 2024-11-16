@@ -98,7 +98,7 @@ def vehicle_update(t, x, u, params={}):
     return dv
 
 # Vehicle input/output model
-vehicle_dynamics = ct.NonlinearIOSystem(
+vehicle_dynamics = ct.nlsys(
     vehicle_update, None, name='vehicle',
     inputs = ['u', 'gear', 'theta'], outputs = ['v'], states=['v'])
 
@@ -113,11 +113,10 @@ vehicle_dynamics = ct.NonlinearIOSystem(
 # Construct a PI controller with rolloff, as a transfer function
 Kp = 0.5                        # proportional gain
 Ki = 0.1                        # integral gain
-PI_control = ct.tf2io(
-    ct.TransferFunction([Kp, Ki], [1, 0.01*Ki/Kp]),
-    name='control', inputs='u', outputs='y')
+PI_control = ct.tf(
+    [Kp, Ki], [1, 0.01*Ki/Kp], name='control', inputs='u', outputs='y')
 
-cruise_PI = ct.InterconnectedSystem(
+cruise_PI = ct.interconnect(
     (vehicle_dynamics, PI_control), name='cruise',
     connections = [['control.u', '-vehicle.v'], ['vehicle.u', 'control.y']],
     inplist = ['control.u', 'vehicle.gear', 'vehicle.theta'],

@@ -77,14 +77,14 @@ plt.tight_layout()
 #
 
 # Create an I/O system representing the static nonlinearity
-P = ct.NonlinearIOSystem(
+P = ct.nlsys(
     updfcn=None,
     outfcn=lambda t, x, u, params: F(u, params['a'], params['b']),
     inputs=['u'], outputs=['y'], name='P')
 
 # Integral controller
 ki = 1000
-C = ct.tf2ss(ct.tf([ki], [1, 0]))
+C = ct.tf([ki], [1, 0])
 
 # Closed loop system
 sys = ct.feedback(P * C, 1)

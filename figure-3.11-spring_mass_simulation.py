@@ -64,7 +64,7 @@ for iter, h in enumerate(hvec):
         offset = int(h/0.1 * i)     # input offset
         x[:, i+1] = x[:, i] + h * (sys.A @ x[:, i] + (sys.B * u[offset])[:, 0])
         td[iter, i] = (i-1) * h
-        yd[iter, i] = sys.C @ x[:, i]
+        yd[iter, i] = (sys.C @ x[:, i]).item()
 
 # Plot the results
 plt.subplot(2, 1, 1)

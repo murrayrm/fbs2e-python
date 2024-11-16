@@ -23,14 +23,14 @@ def fitzhugh_nagumo_dynamics(t, x, u, params):
     R = x[1]
 
     # Compute the dim derivative
-    dx[0] = 10 * (V - (V**3) / 3 - R + u)
+    dx[0] = 10 * (V - (V**3) / 3 - R + u[0])
     dx[1] = 0.8 * (-R + 1.25 * V + 1.5)
     dx[2] = 1
 
     return dx
 
 # Set up an input/output system
-sys = ct.NonlinearIOSystem(
+sys = ct.nlsys(
     updfcn=fitzhugh_nagumo_dynamics, states=3, inputs=1, outputs=3)
 
 # Set up the plotting grid to match the layout in the book

@@ -23,7 +23,7 @@ def predprey(t, x, u, params):
     L = x[1]
 
     # Compute the input
-    bhu = bh0 + u
+    bhu = bh0 + u[0]
 
     # Compute the discrete updates
     dH = H + bhu * H - a * L * H
@@ -32,9 +32,9 @@ def predprey(t, x, u, params):
     return [dH, dL]
 
 # Create a nonlinear I/O system (dt = days)
-io_predprey = ct.NonlinearIOSystem(
-    predprey, None, inputs=('u'), outputs=('H', 'L'),
-    states=('H', 'L'), name='predprey', dt=1/365)
+io_predprey = ct.nlsys(
+    predprey, None, inputs=['u'], outputs=['H', 'L'],
+    states=['H', 'L'], name='predprey', dt=1/365)
 
 X0 = [10, 10]                               # Initial H, L
 T = np.linspace(1845, 1935, 90*365 + 1)     # 90 years
