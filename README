@@ -12,10 +12,11 @@ corresponding example) has the form
 
 where 'N' is the chapter number and 'm' is the example number.  If you
 run the file in Python, it will produce the figures that appear in the
-text.  Note that some figures may look slightly different due to
-Matplotlib formatting.
+text.  Some figures may look slightly different due to Matplotlib
+formatting, and depending on your environment you may need to enter
+`plt.show()` to tell matplotlib to show the figure.
 
-These example use the Python Control Systems Library (python-control),
+These examples use the Python Control Systems Library (python-control),
 which is available via PIP, Conda, or GitHub.  See python-control.org
 for more information.
 
