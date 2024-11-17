@@ -1,5 +1,5 @@
 # example-N.mm-short_title.py - <Short description>
-# RMM, 29 Aug 2021
+# RMM, dd MMM yyyy
 #
 # Figure 3.15: <caption>
 

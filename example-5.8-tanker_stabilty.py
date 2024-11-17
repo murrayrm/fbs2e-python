@@ -1,5 +1,5 @@
 # example-5.8-tanker_stability.py - Stability of a tanker
-# RMM, 29 Aug 2021
+# RMM, 16 Nov 2024
 #
 # Figure 3.15: Stability analysis for a tanker. The rudder characteristics
 # are shown in (a), where the equilibrium points are marked by circles, and
