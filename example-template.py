@@ -20,13 +20,13 @@ gs = fig.add_gridspec(2, 2)
 # (a) Description
 #
 
-fig.add_subplot(gs[0, 0])       # first row, first column
+ax = fig.add_subplot(gs[0, 0])  # first row, first column
 
 #
 # (b) Description
 #
 
-fig.add_subplot(gs[0, 1])       # first row, second column
+ax = fig.add_subplot(gs[0, 1])  # first row, second column
 
 # Save the figure
 plt.savefig("figure-N.mm-short_title.png", bbox_inches='tight')
