@@ -14,8 +14,16 @@ ct.use_fbs_defaults()
 # System dynamics
 #
 
-def tanker_dynamics(
-        t, x, u, a1=-0.6, a2=-0.3, a3=-5, a4=-2, alpha=-2, b1=0.1, b2=-0.8):
+def tanker_dynamics(t, x, u, params):
+    # Parameter values
+    a1 = params.get('a1', -0.6)
+    a2 = params.get('a2', -0.3)
+    a3 = params.get('a3', -5)
+    a4 = params.get('a4', -2)
+    alpha = params.get('alpha', -2)
+    b1 = params.get('b1', 0.1)
+    b2 = params.get('b2', -0.8)
+
     v, r = x[0], x[1]           # velocity and turning rate
     delta = u[0]                # rudder angle
 
@@ -25,7 +33,6 @@ def tanker_dynamics(
     ]
 tanker_model = ct.nlsys(
     tanker_dynamics, None, inputs='delta', states=['v', 'r'])
-print(tanker_model)
     
 
 # Set up the plotting grid to match the layout in the book
@@ -71,8 +78,8 @@ from math import sin, cos
 ax = fig.add_subplot(gs[0, 1])  # first row, second column
 
 # Create a full tanker model, including position and orientation
-def full_tanker_dynamics(t, x, u, **params):
-    vdot, rdot = tanker_dynamics(t, x[3:], u, **params)
+def full_tanker_dynamics(t, x, u, params):
+    vdot, rdot = tanker_dynamics(t, x[3:], u, params)
     theta, v, r = x[2], x[3], x[4]
     return [
         cos(theta) + v * sin(theta), -sin(theta) + v * cos(theta),
