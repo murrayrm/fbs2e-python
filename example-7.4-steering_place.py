@@ -52,13 +52,14 @@ for omega_c in [0.5, 0.7, 1]:
     kf = omega_c**2
 
     # Compute the closed loop system
-    clsys = ct.feedback(sys, K) * kf
+    ctrl, clsys = ct.create_statefbk_iosystem(
+        sys, K, kf, feedfwd_pattern='refgain')
 
     # Simulate the closed loop dynamics
     response = ct.forced_response(clsys, timepts, 1, X0=0)
 
-    ax_pos.plot(response.time, response.states[0], 'b')
-    ax_delta.plot(response.time, (kf - K @ response.states)[0], 'b')
+    ax_pos.plot(response.time, response.outputs['y'], 'b')
+    ax_delta.plot(response.time, response.outputs['delta'], 'b')
 
 # Label the plot
 ax_pos.set_ylabel(r"Lateral position $y/b$")
@@ -92,13 +93,14 @@ for zeta_c in [0.5, 0.7, 1]:
     kf = omega_c**2
 
     # Compute the closed loop system
-    clsys = ct.feedback(sys, K) * kf
+    ctrl, clsys = ct.create_statefbk_iosystem(
+        sys, K, kf, feedfwd_pattern='refgain')
 
     # Simulate the closed loop dynamics
     response = ct.forced_response(clsys, timepts, 1, X0=0)
 
-    ax_pos.plot(response.time, response.states[0], 'b')
-    ax_delta.plot(response.time, (kf - K @ response.states)[0], 'b')
+    ax_pos.plot(response.time, response.outputs['y'], 'b')
+    ax_delta.plot(response.time, response.outputs['delta'], 'b')
 
 # Label the plot
 ax_pos.set_ylabel(r"Lateral position $y/b$")
@@ -117,4 +119,4 @@ ax_delta.text(3, 0.2, r"$\zeta_c$")
 
 # Save the figure
 fig.align_ylabels()
-plt.savefig("figure-7.4-steering_place.png", bbox_inches='tight')
+plt.savefig("figure-7.6-steering_place.png", bbox_inches='tight')
