@@ -47,11 +47,12 @@ steering = ct.nlsys(
 # Generate the linearization at a given velocity
 def linearize_lateral(v0=10, normalize=False, output_full_state=False):
     # Compute the linearization at the given velocity
-    linsys = ct.linearize(steering, 0, [v0, 0])[1, 1]
+    linsys = ct.linearize(steering, 0, [v0, 0])
 
     # Extract out the lateral dynamics
     latsys = ct.model_reduction(
-        linsys, [0], method='truncate', warn_unstable=False)
+        linsys, elim_states=[0], keep_inputs=[1], keep_outputs=[1],
+        method='truncate', warn_unstable=False)
 
     # Normalize coordinates if desired
     if normalize:
