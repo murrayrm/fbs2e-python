@@ -55,7 +55,7 @@ sys = ct.ss(A, B, C, D)
 # Generate the frequency response
 omega = np.logspace(4, 7, 10000)  # Frequency range from 10^4 to 10^7 rad/s
 freqresp = ct.frequency_response(sys, omega)
-mag, phase = freqresp.magnitude[0, 0], freqresp.phase[0, 0]
+mag, phase = freqresp.magnitude, freqresp.phase
 
 # Create the Bode plot
 cplt = freqresp.plot()
